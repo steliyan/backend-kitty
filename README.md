@@ -96,6 +96,22 @@ listen_on unix:/tmp/mykitty
 
 This will set the `KITTY_LISTEN_ON` environment variable, that the plugin uses to confirm a Kitty session.
 
+For password authentication, configure the backend's `password` option and use:
+
+```conf
+allow_remote_control password
+listen_on unix:/tmp/mykitty
+remote_control_password "your-password" ls focus-window resize-window action goto-layout launch
+```
+
+Authenticated commands require `kitten` (preferred) or `kitty` on Neovim's `PATH`,
+and the `KITTY_PUBLIC_KEY` environment variable provided by Kitty. The client
+encrypts requests; sending a plaintext password on the socket does not authenticate.
+The backend supplies the configured password over stdin, independently of any
+`KITTY_RC_PASSWORD` used by other plugins, and waits for command acknowledgement
+so authentication errors are reported. Without a configured password, the backend
+continues to use the direct socket client.
+
 
 Resize while Neovim is focused is handled inside Neovim and, at a full-width or full-height window, by `resize-window` on the socket.
 
