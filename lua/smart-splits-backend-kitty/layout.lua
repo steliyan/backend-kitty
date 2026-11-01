@@ -195,8 +195,7 @@ function M.wrap_target(windows, origin, direction)
   for _, window in ipairs(windows or {}) do
     local box = boxes[window.id]
     if window.id ~= origin.id and box and box.x ~= nil and box.y ~= nil then
-      local aligned = horizontal
-          and overlaps(origin_box.y, origin_box.y + origin_box.h, box.y, box.y + box.h)
+      local aligned = horizontal and overlaps(origin_box.y, origin_box.y + origin_box.h, box.y, box.y + box.h)
         or (not horizontal and overlaps(origin_box.x, origin_box.x + origin_box.w, box.x, box.x + box.w))
       if aligned then
         local pos = horizontal and box.x or box.y
