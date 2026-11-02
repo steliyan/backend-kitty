@@ -99,12 +99,12 @@ end
 ---@return table<integer, { x: number, y: number, w: number, h: number }>
 function M.place(windows)
   local by_id = M.index_by_id(windows)
-  ---@type table<integer, { x: number|nil, y: number|nil, w: number, h: number }>
+  ---@type table<integer, { x: number, y: number, w: number, h: number }>
   local box = {}
   for _, window in ipairs(windows or {}) do
     box[window.id] = {
-      x = nil,
-      y = nil,
+      x = 0,
+      y = 0,
       w = window.columns or window.width or 1,
       h = window.lines or window.height or 1,
     }
